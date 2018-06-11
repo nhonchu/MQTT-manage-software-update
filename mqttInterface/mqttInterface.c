@@ -241,21 +241,6 @@ int mqtt_ProcessEvent(mqtt_interface_st * mqttObject, unsigned waitDelayMs)
 //-------------------------------------------------------------------------------------------------------
 int mqtt_StartSession(mqtt_interface_st * mqttObject)
 {
-	/*
-		Entry point of MQTTspooler :
-		- Open a MQTT session on AirVantage server, with provided DeviceID (Serial Number) and password
-		- Subscribe to TOPIC_NAME_SUBSCRIBE with a provided callback function to process incoming MQTT message
-		- Launch the background folder scanning function to scan the OutboundDataFolder (spooling thread)
-
-		Mandatory ordered arguments:
-			1. Serial Number
-			2. password (as registered on Airvantage, during Application Model assignment)
-			3. Spooling directory name (outbound): CVS to MQTT (for publishing)
-			4. Inbound data directory name: Subcribed-topic MQTT incoming message to CSV
-		Optional argument (5th):
-			5. Spooling frequency in number of seconds
-	*/
-
 	int 			rc = 0;
 	
 	int				nMaxRetry = 3;

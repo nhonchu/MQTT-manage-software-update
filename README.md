@@ -13,8 +13,8 @@ Refer to the sample code, mqttSampleAirVantage.c, for how to use the mqttAirVant
 
 The software stack is follow:
 
-- mqttSampleAirVantage.c : sample code, publisg data and software installation management
-- mqttAirVantage : implementing AirVantage-specfic MQTT topics and ack mechanism
+- mqttSampleAirVantage.c : sample code, publish data and software installation management
+- mqttAirVantage : implementing AirVantage-specific MQTT topics and ack mechanism
 - mqttInterface : encapsulates Paho MQTTClient, exposing generic mqtt key functions
 - tlsInterface  : manage underlying socket (non-secured and TLS) and interface with Mbed TLS
 - Mbed TLS : TLS features
@@ -155,6 +155,6 @@ Software/Firmware Install over the Air
 
 - In AirVantage portal, click the *More* menu then *Install Application*. Select the new MQTT application you've released previously to start a FOTA/SOTA operation.
 - You should be seeing the software installation request arriving in the sample device application
-- The software package download and install procedure is not implemented in the sample. Your device should handle these device-specfic procedures.
-- Once the software installation is performed, your application should report the status to AirVantage, by sending an ACk along with an operation id. This is showcased in the sample application.
+- The software package download and install procedure is not implemented in the sample. Your device should handle these device-specfic procedures (e.g. authenticate the package by checking signature, integrity check, sw/fw install).
+- Once the software installation is performed, your application should report the status to AirVantage, by sending an ACK along with an operation id. This is showcased in the sample application.
 

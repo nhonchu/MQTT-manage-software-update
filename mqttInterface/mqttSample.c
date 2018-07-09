@@ -1,17 +1,10 @@
 /*******************************************************************************************************************
  
- MQTT Sample app to interface with AirVantage server
+ MQTT Sample app to interface with MQTT broker
 
-	This sample showcases the following features using the mqttAirVantage interface :
-		- Publish simple message to AirVantage
-		- Receive AirVantage commands along with command parameters
-		- Receive Software/Firmware Installation (FOTA/SOTA) Request from AirVantage
-			and ACKing the SW installation request
-
-	Communication with AirVantage performed over MQTT prococol, with ot without secured transport : TLS
-
-	Although the Software Package URL is provided by AirVantage, this sample does not perform
-	software package download over https and does not handle software installation (platform specific).
+	This sample showcases the following features using mqttInterface :
+		- Publish simple message to broker (e.g. iot.eclipse.org)
+		- receive message from the subscribed topic
 
 	N. Chu
 	June 2018

@@ -37,6 +37,7 @@
 #ifndef _MQTT_INTERFACE_H_
 #define _MQTT_INTERFACE_H_
 
+#include "MQTTClient.h"
 
 #define MQTT_BROKER		"MqttBrokerUrl"
 #define	MQTT_PORT		"MqttBrokerPort"

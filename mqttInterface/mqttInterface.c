@@ -35,7 +35,6 @@
 *******************************************************************************************************************/
 
 #include <stdio.h>
-#include "MQTTClient.h"
 #include <memory.h>
 #include "mqttInterface.h"
 
@@ -295,9 +294,37 @@ int mqtt_StartSession(mqtt_interface_st * mqttObject)
 }
 
 //-------------------------------------------------------------------------------------------------------
+void mqtt_DefaultIncomingMessageHandler(MessageData* md)
+{
+	/*
+		This is a callback function (handler), invoked by MQTT client whenever there is an incoming message
+		It performs the following actions :
+		  - deserialize the incoming MQTT JSON-formatted message
+		  - call convertDataToCSV()
+	*/
+
+	MQTTMessage* message = md->message;
+	MQTTString*  topicName = md->topicName;
+
+	int payloadLen = (int)message->payloadlen;
+
+	char* topic = malloc(topicName->lenstring.len + 1);
+	memcpy(topic, topicName->lenstring.data, topicName->lenstring.len);
+	topic[topicName->lenstring.len] = 0;
+
+	printf("\nIncoming data from topic '%s' (%d) :\n", topic, payloadLen);
+	printf("%.*s\n", payloadLen, (char*)message->payload);
+}
+
+//-------------------------------------------------------------------------------------------------------
 int mqtt_SubscribeTopic(mqtt_interface_st * mqttObject, const char* topicName, messageHandler msgHandler)
 {
 	printf("Subscribing to topic %s... ", topicName);
+	if (msgHandler == NULL)
+	{
+		msgHandler = mqtt_DefaultIncomingMessageHandler;
+	}
+
 	int rc = MQTTSubscribe(&mqttObject->mqttClient, topicName, mqttObject->qoS, msgHandler);
 	printf("%s\n", rc == 0 ? "OK" : "Failed");
 	//printf("Subscribed %d\n", rc);
